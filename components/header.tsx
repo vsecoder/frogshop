@@ -14,7 +14,7 @@ const navItems = ["Клавы", "Мышки", "Камеры", "Прочее"];
 
 export default function Header() {
     return (
-        <header className="flex gap-5 justify-between w-full whitespace-nowrap max-w-[1240px] max-md:flex-wrap max-md:max-w-full m-auto p-5">
+        <header className="flex gap-5 justify-between w-full whitespace-nowrap max-w-[1240px] max-md:flex-wrap max-md:max-w-full m-auto p-5 pb-0">
             <div className="flex gap-5 justify-between max-md:flex-wrap max-md:max-w-full">
                 <div className="flex gap-5 text-2xl font-semibold text-black">
                     <img
@@ -25,7 +25,7 @@ export default function Header() {
                     />
                     <div className="my-auto">FrogShop</div>
                 </div>
-                <nav className="flex gap-5 justify-between my-auto">
+                <nav className="gap-5 justify-between my-auto hidden md:flex">
                     {navItems.map((item, index) => (
                         <NavItem key={index} label={item} />
                     ))}
