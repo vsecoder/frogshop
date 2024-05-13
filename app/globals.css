@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.container,
+body,
+svg,
+html {
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    svg {
+        width: max-content;
+    }
+}
