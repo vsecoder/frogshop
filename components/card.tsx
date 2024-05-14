@@ -1,3 +1,5 @@
+"use client";
+
 import StarRating from './stars';
 import * as React from "react";
 
@@ -10,8 +12,8 @@ interface ProductCardProps {
 }
 
 const Card: React.FC<ProductCardProps> = ({
-    image,
-    text,
+  image,
+  text,
   rating,
   price,
 }) => {
@@ -34,7 +36,10 @@ const Card: React.FC<ProductCardProps> = ({
               {price.toFixed(2)}$
             </div>
           </div>
-          <button className="justify-center items-center px-16 py-4 mt-2.5 text-xl font-medium text-white whitespace-nowrap bg-blue-600 rounded-[10000px] max-md:px-5">
+          <button 
+            className="justify-center items-center px-16 py-4 mt-2.5 text-xl font-medium text-white whitespace-nowrap bg-blue-600 rounded-[10000px] max-md:px-5 cursor-pointer"
+            onClick={() => window.location.href = `/products/${text}`}
+          >
             Перейти
           </button>
         </div>

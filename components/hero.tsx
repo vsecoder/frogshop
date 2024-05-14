@@ -1,3 +1,5 @@
+"use client";
+
 import StarRating from './stars';
 
 interface MiniCardProps {
@@ -12,7 +14,10 @@ const MiniCard: React.FC<MiniCardProps> = ({ text, image }) => {
                 <div className="text-ml md:text-xl font-bold">
                     {text}
                 </div>
-                <div className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[147px] md:max-w-[150px]">
+                <div
+                    className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[147px] md:max-w-[150px] cursor-pointer"
+                    onClick={() => window.location.href = `/products/${text}`}
+                >
                     <div>Приобрести <span className='hidden md:contents'>---&gt;</span></div>
                 </div>
             </div>
@@ -26,7 +31,7 @@ const MiniCard: React.FC<MiniCardProps> = ({ text, image }) => {
 export default function Hero() {
     return (
         <div className="p-5 pt-0">
-            <section className="pr-20 pb-1.5 pl-10 mt-10 max-w-full bg-blue-600 rounded-[30px] w-[1240px] max-md:px-5 m-auto overflow-hidden">
+            <section className="pr-20 pb-1.5 pl-10 mt-10 max-w-full w-[1240px] bg-blue-600 rounded-[30px] max-md:px-5 m-auto overflow-hidden">
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0 relative">
                     <div className="flex flex-col w-[43%] max-md:ml-0 max-md:w-full">
                         <div className="flex flex-col self-stretch my-auto max-md:mt-10 p-5 pt-0 md:pt-5">
@@ -50,7 +55,10 @@ export default function Hero() {
                             <p className="mt-1.5 text-xs font-medium text-white">
                                 <span className="line-through">70$</span> &gt; 49.9$
                             </p>
-                            <button className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium text-white whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[200px]">
+                            <button
+                                className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium text-white whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[200px]"
+                                onClick={() => window.location.href = '/products/Apple Magic Pro'}
+                            >
                                 <span>Приобрести ---&gt;</span>
                             </button>
                         </div>
