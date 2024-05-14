@@ -26,8 +26,8 @@ const MiniCard: React.FC<MiniCardProps> = ({ text, image }) => {
 export default function Hero() {
     return (
         <div className="p-5 pt-0">
-            <section className="pr-20 pb-1.5 pl-10 mt-10 max-w-full bg-blue-600 rounded-[30px] w-[1240px] max-md:px-5 m-auto">
-                <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+            <section className="pr-20 pb-1.5 pl-10 mt-10 max-w-full bg-blue-600 rounded-[30px] w-[1240px] max-md:px-5 m-auto overflow-hidden">
+                <div className="flex gap-5 max-md:flex-col max-md:gap-0 relative">
                     <div className="flex flex-col w-[43%] max-md:ml-0 max-md:w-full">
                         <div className="flex flex-col self-stretch my-auto max-md:mt-10 p-5">
                             <header className="flex gap-5 self-start text-base font-semibold text-white whitespace-nowrap">
@@ -55,7 +55,7 @@ export default function Hero() {
                             </button>
                         </div>
                     </div>
-                    <div className="flex flex-col ml-5 w-[57%] max-md:ml-0 max-md:w-full">
+                    <div className="flex flex-col ml-5 w-[57%] max-md:ml-0 max-md:w-full absolute -bottom-[120px] -right-[370px] md:static">
                         <img
                             src="/header/1.png"
                             alt="Apple Magic Pro keyboard"
@@ -68,7 +68,9 @@ export default function Hero() {
                 <div className="grid gap-5 grid-cols-2 md:grid-cols-3 max-md:gap-5">
                     <MiniCard text="Клавиатуры и средства ввода" image="/header/2.png" />
                     <MiniCard text="Средства аудио и видео ввода" image="/header/3.png" />
-                    <div className="col-span-2 md:col-span-1"><MiniCard text="Прочая переферия" image="/header/4.png" /></div>
+                    <div className="col-span-2 md:col-span-1">
+                        <MiniCard text="Прочая переферия" image="/header/4.png" />
+                    </div>
                 </div>
             </div>
         </div>

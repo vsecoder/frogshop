@@ -1,33 +1,44 @@
 import StarRating from './stars';
+import * as React from "react";
 
-interface CardProps {
-    text: string;
-    image: string;
-    link: string;
+
+interface ProductCardProps {
+  image: string;
+  text: string;
+  rating: number;
+  price: number;
 }
 
-const Card: React.FC<CardProps> = ({ text, image, link }) => {
+const Card: React.FC<ProductCardProps> = ({
+    image,
+    text,
+  rating,
+  price,
+}) => {
     return (
-        <>
-            <div className="max-w-[190px] min-w-[190px] md:max-w-[280px] md:h-auto relative grow items-start mx-auto w-full max-md:px-5">
-                <div className="w-full bg-white rounded-[30px]">
-                    <img src={image} className="" />
-                    <div className="p-8 md:pt-6 pr-0 md:pb-16 md:pl-6">
-                        <div className="text-xl font-bold">
-                            {text}
-                        </div>
-                        <p className="mt-1.5 text-xs font-medium">
-                            <span className="line-through">70$</span> &gt; 49.9$
-                        </p>
-                        <StarRating rating={3.5} color='white' />
-                    </div>
-                </div>
-                <div className="m-auto bg-blue-600 text-white flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-full border border-white border-solid max-md:px-5 max-w-[300px]">
-                    <div>Перейти</div>
-                </div>
+        <div className="flex flex-col grow max-md:mt-5 min-w-[190px] md:max-w-full">
+          <div className="flex flex-col items-start pb-7 w-full bg-white shadow-2xl rounded-[30px]">
+            <div className="flex justify-center items-center self-stretch bg-blue-600 border border-blue-600 border-solid rounded-[30px]">
+              <img
+                loading="lazy"
+                src={image}
+                alt={`${text} product`}
+                className="max-w-full w-full"
+              />
             </div>
-        </>
-    );
+            <div className="mt-7 px-7 text-base font-medium text-stone-950 max-md:px-6">
+                {text}
+                <StarRating rating={rating} color="white" />
+            </div>
+            <div className="mt-1.5 px-7 text-xl font-bold text-stone-950 max-md:px-6">
+              {price.toFixed(2)}$
+            </div>
+          </div>
+          <button className="justify-center items-center px-16 py-4 mt-2.5 text-xl font-medium text-white whitespace-nowrap bg-blue-600 rounded-[10000px] max-md:px-5">
+            Перейти
+          </button>
+        </div>
+      );
 };
 
 export default Card;

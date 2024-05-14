@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import Hero from "../components/hero";
 import Products from "../components/products";
+import Team from "../components/team";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Products />
+      <Team />
     </div>
   );
 }
