@@ -32,7 +32,7 @@ const Product: React.FC<ProductProps> = ({ name }) => {
         <div className="mt-10 m-auto bg-white shadow-2xl rounded-[30px] max-w-full w-[1240px] max-md:max-w-full">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
             <div className="flex flex-col w-[43%] max-md:ml-0 max-md:w-full">
-                <img src="/id/1.png" className="shrink-0 mx-auto max-w-full bg-blue-600 border border-blue-600 border-solid h-[379px] rounded-[30px] w-[559px]" />
+                <img src="/id/1.png" className="shrink-0 mx-auto max-w-full bg-blue-600 border border-blue-600 border-solid rounded-[30px] w-[559px]" />
             </div>
             <div className="flex flex-col ml-5 w-[57%] max-md:ml-0 max-md:w-full">
             <div className="flex flex-col mt-8 p-6 md:p-4 text-xs font-medium text-stone-950 max-md:mt-10 max-md:max-w-full">
