@@ -7,13 +7,13 @@ interface MiniCardProps {
 
 const MiniCard: React.FC<MiniCardProps> = ({ text, image }) => {
     return (
-        <div className="h-[170px] md:h-auto relative flex overflow-hidden grow items-start mx-auto w-full text-white bg-blue-600 rounded-[30px] max-md:px-5">
+        <div className="h-[170px] md:h-auto pt-2.5 relative flex overflow-hidden grow items-start mx-auto w-full text-white bg-blue-600 rounded-[30px] max-md:px-5">
             <div className="relative z-10 pt-3 md:pt-6 pr-0 md:pb-16 md:pl-6 flex-initial w-[200px]">
                 <div className="text-ml md:text-xl font-bold">
                     {text}
                 </div>
                 <div className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[147px] md:max-w-[150px]">
-                    <div>Приобрести ---&gt;</div>
+                    <div>Приобрести <span className='hidden md:contents'>---&gt;</span></div>
                 </div>
             </div>
             <div className="flex-initial text-align-right w-100 mt-10 ml-10 absolute -bottom-12 -right-12 md:bottom-0 md:right-0">
@@ -29,7 +29,7 @@ export default function Hero() {
             <section className="pr-20 pb-1.5 pl-10 mt-10 max-w-full bg-blue-600 rounded-[30px] w-[1240px] max-md:px-5 m-auto overflow-hidden">
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0 relative">
                     <div className="flex flex-col w-[43%] max-md:ml-0 max-md:w-full">
-                        <div className="flex flex-col self-stretch my-auto max-md:mt-10 p-5">
+                        <div className="flex flex-col self-stretch my-auto max-md:mt-10 p-5 pt-0 md:pt-5">
                             <header className="flex gap-5 self-start text-base font-semibold text-white whitespace-nowrap">
                                 <img
                                     src="logo-invert.svg"
@@ -55,7 +55,7 @@ export default function Hero() {
                             </button>
                         </div>
                     </div>
-                    <div className="flex flex-col ml-5 w-[57%] max-md:ml-0 max-md:w-full absolute -bottom-[120px] -right-[370px] md:static">
+                    <div className="flex flex-col ml-5 w-[57%] max-md:ml-0 max-md:w-full absolute -bottom-[70px] -right-[210px] md:static">
                         <img
                             src="/header/1.png"
                             alt="Apple Magic Pro keyboard"

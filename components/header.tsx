@@ -17,7 +17,7 @@ export default function Header() {
         <>
             <header className="flex gap-5 justify-between w-full whitespace-nowrap max-w-[1240px] max-md:flex-wrap max-md:max-w-full m-auto p-5 pb-0">
                 <div className="flex gap-5 justify-between max-md:flex-wrap max-md:max-w-full">
-                    <div className="flex gap-5 text-2xl font-semibold text-black">
+                    <div className="flex gap-5 text-xl md:text-2xl font-semibold text-black">
                         <img
                             loading="lazy"
                             src="/logo.svg"
