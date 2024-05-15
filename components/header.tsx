@@ -1,12 +1,10 @@
 "use client";
 
-import { FC } from "react";
-
 interface NavItemProps {
     label: string;
 }
 
-const NavItem: FC<NavItemProps> = ({ label }) => {
+function NavItem({ label }: NavItemProps) {
     return <div className="text-base text-neutral-400 cursor-pointer">{label}</div>;
 };
 

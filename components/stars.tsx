@@ -3,7 +3,7 @@ interface StarRatingProps {
     color?: string;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ rating, color }) => {
+export default function StarRating({ rating, color = 'black' }: StarRatingProps) {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
 
@@ -35,5 +35,3 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, color }) => {
         </div>
     );
 };
-
-export default StarRating;

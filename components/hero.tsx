@@ -3,11 +3,12 @@
 import StarRating from './stars';
 
 interface MiniCardProps {
+    id: number;
     text: string;
     image: string;
 }
 
-const MiniCard: React.FC<MiniCardProps> = ({ text, image }) => {
+function MiniCard({ id, text, image }: MiniCardProps) {
     return (
         <div className="h-[170px] md:h-auto pt-2.5 relative flex overflow-hidden grow items-start mx-auto w-full text-white bg-blue-600 rounded-[30px] max-md:px-5">
             <div className="relative z-10 pt-3 md:pt-6 pr-0 md:pb-16 md:pl-6 flex-initial w-[200px]">
@@ -16,7 +17,7 @@ const MiniCard: React.FC<MiniCardProps> = ({ text, image }) => {
                 </div>
                 <div
                     className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[147px] md:max-w-[150px] cursor-pointer"
-                    onClick={() => window.location.href = `/products/${text}`}
+                    onClick={() => window.location.href = `/products/${id}`}
                 >
                     <div>Приобрести <span className='hidden md:contents'>---&gt;</span></div>
                 </div>
@@ -57,7 +58,7 @@ export default function Hero() {
                             </p>
                             <button
                                 className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium text-white whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[200px]"
-                                onClick={() => window.location.href = '/products/Apple Magic Pro'}
+                                onClick={() => window.location.href = '/products/1'}
                             >
                                 <span>Приобрести ---&gt;</span>
                             </button>
@@ -74,10 +75,10 @@ export default function Hero() {
             </section>
             <div className="mt-5 w-full max-w-[1240px] max-md:max-w-full m-auto">
                 <div className="grid gap-5 grid-cols-2 md:grid-cols-3 max-md:gap-5">
-                    <MiniCard text="Клавиатуры и средства ввода" image="/header/2.png" />
-                    <MiniCard text="Средства аудио и видео ввода" image="/header/3.png" />
+                    <MiniCard text="Клавиатуры и средства ввода" image="/header/2.png" id={1} />
+                    <MiniCard text="Средства аудио и видео ввода" image="/header/3.png" id={2} />
                     <div className="col-span-2 md:col-span-1">
-                        <MiniCard text="Прочая переферия" image="/header/4.png" />
+                        <MiniCard text="Прочая переферия" image="/header/4.png" id={3} />
                     </div>
                 </div>
             </div>
