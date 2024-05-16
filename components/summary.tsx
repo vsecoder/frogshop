@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 
 type BadgeProps = {
@@ -28,35 +30,64 @@ const Section: React.FC<SectionProps> = ({ title, badges, textColor }) => (
     </section>
 );
 
-const data = {
+var data = {
     goodMatches: [
-        { text: "Отличный отклик", bgColor: "bg-emerald-200" },
-        { text: "Имба", bgColor: "bg-emerald-200" },
-        { text: "Отличный отклик", bgColor: "bg-emerald-200" },
-        { text: "топ", bgColor: "bg-emerald-200" },
-        { text: "Хорошая цена", bgColor: "bg-emerald-200" },
-        { text: "Достойное качетво", bgColor: "bg-emerald-200" },
+        { text: "-", bgColor: "bg-emerald-200" },
     ],
     badMatches: [
-        { text: "Сломались", bgColor: "bg-red-100" },
-        { text: "Плохое качество", bgColor: "bg-red-100" },
-        { text: "Сломались", bgColor: "bg-red-100" },
-        { text: "Сломались", bgColor: "bg-red-100" },
-        { text: "Плохое качество", bgColor: "bg-red-100" },
-        { text: "Плохое качество", bgColor: "bg-red-100" },
+        { text: "-", bgColor: "bg-red-100" },
     ],
     otherMatches: [
-        { text: "Тыры пыры", bgColor: "bg-neutral-400" },
-        { text: "Чух Чух Чух", bgColor: "bg-neutral-400" },
-        { text: "кваква", bgColor: "bg-neutral-400" },
+        { text: "-", bgColor: "bg-neutral-400" },
     ],
 };
 
-export default function Summary() {
+export default function Summary({ id }: { id: string }) {
+    const [reviews, setReviews] = React.useState('');
+    const [summary, setSummary] = React.useState({ nice: "", bad: "" });
+
+    React.useEffect(() => {
+        fetch("/api/products?id=" + id)
+            .then((response) => response.json())
+            .then((response) => {
+                const reviews = response.body.reviews.map((review: any) => review.content).join("\n---\n");
+                setReviews(reviews);
+            });
+    }, []);
+
+    React.useEffect(() => {
+        fetch("/api/summary?content=" + reviews)
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response);
+                let body = response.body.choices;
+
+                if (!body) {
+                    return;
+                }
+
+                if (body.length === 0) {
+                    return;
+                }
+
+                body = body[0].message.content;
+
+                const { nice, bad } = JSON.parse(body);
+                setSummary({ nice: nice, bad: bad });
+                data = {
+                    goodMatches: nice.map((text: any) => ({ text, bgColor: "bg-emerald-200" })),
+                    badMatches: bad.map((text: any) => ({ text, bgColor: "bg-red-100" })),
+                    otherMatches: [
+                        { text: "-", bgColor: "bg-neutral-400" },
+                    ],
+                };
+            });
+    }, [reviews]);
+
     return (
         <div className="p-5 pt-0">
             <section className="flex flex-col p-8 m-auto mt-2.5 bg-white shadow-2xl rounded-[30px] max-md:px-5 max-w-full w-[1240px] max-md:max-w-full">
-                <header className="flex gap-5 justify-between pr-20 w-full max-md:flex-wrap max-md:pr-5 max-md:max-w-full">
+                <header className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full">
                     <div className="flex gap-5 items-center font-semibold">
                         <img
                             loading="lazy"

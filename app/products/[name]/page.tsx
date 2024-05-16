@@ -23,7 +23,7 @@ export default function Home() {
     <div className="bg-[#FAF9F9]">
       <Header />
       <Product name={decodedName} />
-      <Summary />
+      <Summary id={name} />
       <Reviews id={name} />
       <SignedIn>
         <Write />
