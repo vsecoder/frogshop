@@ -40,7 +40,7 @@ export default function Product({ name }: ProductProps) {
         console.log(data);
         data = data.body;
         setProduct({
-          title: data.title,
+          title: data.name,
           price: data.price,
           image: data.image,
           rating: data.rating,
