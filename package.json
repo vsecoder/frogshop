@@ -1,6 +1,6 @@
 {
   "name": "frogshop",
-  "version": "0.7.1",
+  "version": "0.8.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.0.12",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@monaco-editor/react": "^4.6.0",

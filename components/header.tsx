@@ -1,5 +1,8 @@
 "use client";
 
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+
 interface NavItemProps {
     label: string;
 }
@@ -15,18 +18,19 @@ export default function Header() {
         <>
             <header className="flex gap-5 justify-between w-full whitespace-nowrap max-w-[1240px] max-md:flex-wrap max-md:max-w-full m-auto p-5 pb-0">
                 <div className="flex gap-5 justify-between max-md:flex-wrap max-md:max-w-full">
-                    <div
-                        className="flex gap-5 text-xl md:text-2xl font-semibold text-black cursor-pointer"
-                        onClick={() => window.location.href = '/'}
-                    >
-                        <img
-                            loading="lazy"
-                            src="/logo.svg"
-                            alt="FrogShop logo"
-                            className="shrink-0 aspect-[1.1] w-[55px]"
-                        />
-                        <div className="my-auto">FrogShop</div>
-                    </div>
+                    <Link href="/">
+                        <div
+                            className="flex gap-5 text-xl md:text-2xl font-semibold text-black cursor-pointer"
+                        >
+                            <img
+                                loading="lazy"
+                                src="/logo.svg"
+                                alt="FrogShop logo"
+                                className="shrink-0 aspect-[1.1] w-[55px]"
+                            />
+                            <div className="my-auto">FrogShop</div>
+                        </div>
+                    </Link>
                     <nav className="gap-5 justify-between my-auto hidden md:flex">
                         {navItems.map((item, index) => (
                             <NavItem key={index} label={item} />
@@ -44,13 +48,18 @@ export default function Header() {
                         <div>Поиск</div>
                     </div>
                     <div className="flex gap-2.5 justify-center px-6 py-2.5 text-white rounded-md bg-neutral-900 max-md:px-5 cursor-pointer">
-                        <img
-                            loading="lazy"
-                            src="/icons/user.svg"
-                            alt="Login icon"
-                            className="shrink-0 w-6 aspect-square"
-                        />
-                        <div className="my-auto">Войти</div>
+                        <SignedOut>
+                            <img
+                                loading="lazy"
+                                src="/icons/user.svg"
+                                alt="Login icon"
+                                className="shrink-0 w-6 aspect-square"
+                            />
+                            <SignInButton />
+                        </SignedOut>
+                        <SignedIn>
+                            <UserButton />
+                        </SignedIn>
                     </div>
                 </div>
             </header>

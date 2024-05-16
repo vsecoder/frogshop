@@ -1,6 +1,7 @@
 "use client";
 
 import StarRating from './stars';
+import Link from 'next/link';
 
 interface MiniCardProps {
     id: number;
@@ -15,12 +16,13 @@ function MiniCard({ id, text, image }: MiniCardProps) {
                 <div className="text-ml md:text-xl font-bold">
                     {text}
                 </div>
-                <div
-                    className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[147px] md:max-w-[150px] cursor-pointer"
-                    onClick={() => window.location.href = `/products/${id}`}
-                >
-                    <div>Приобрести <span className='hidden md:contents'>---&gt;</span></div>
-                </div>
+                <Link href={`/products/${id}`}>
+                    <div
+                        className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[147px] md:max-w-[150px] cursor-pointer"
+                    >
+                        <div>Приобрести <span className='hidden md:contents'>---&gt;</span></div>
+                    </div>
+                </Link>
             </div>
             <div className="flex-initial text-align-right w-100 mt-10 ml-10 absolute -bottom-12 -right-12 md:bottom-0 md:right-0">
                 <img src={image} className="md:w-[200px] md:h-[210px]" />
@@ -56,12 +58,13 @@ export default function Hero() {
                             <p className="mt-1.5 text-xs font-medium text-white">
                                 <span className="line-through">70$</span> &gt; 49.9$
                             </p>
-                            <button
-                                className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium text-white whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[200px]"
-                                onClick={() => window.location.href = '/products/1'}
-                            >
-                                <span>Приобрести ---&gt;</span>
-                            </button>
+                            <Link href="/products/1">
+                                <button
+                                    className="flex gap-2.5 justify-center px-6 py-2.5 mt-2.5 text-sm font-medium text-white whitespace-nowrap rounded-md border border-white border-solid max-md:px-5 max-w-[200px]"
+                                >
+                                    <span>Приобрести ---&gt;</span>
+                                </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="flex flex-col ml-5 w-[57%] max-md:ml-0 max-md:w-full absolute -bottom-[70px] -right-[210px] md:static">

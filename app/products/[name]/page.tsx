@@ -2,6 +2,7 @@
 
 import Header from "../../../components/header";
 import Product from "../../../components/product";
+import Reviews from '../../../components/reviews';
 import Team from "../../../components/team";
 
 import { usePathname } from 'next/navigation'
@@ -19,6 +20,7 @@ export default function Home() {
     <div className="bg-[#FAF9F9]">
       <Header />
       <Product name={decodedName} />
+      <Reviews id={name} />
       <Team />
     </div>
   );

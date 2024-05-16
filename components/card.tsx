@@ -2,6 +2,7 @@
 
 import StarRating from './stars';
 import * as React from "react";
+import Link from 'next/link';
 
 
 interface ProductCardProps {
@@ -32,12 +33,13 @@ export default function Card({ id, image, text, rating, price }: ProductCardProp
           {price.toFixed(2)}$
         </div>
       </div>
-      <button
-        className="justify-center items-center px-16 py-4 mt-2.5 text-xl font-medium text-white whitespace-nowrap bg-blue-600 rounded-[10000px] max-md:px-5 cursor-pointer"
-        onClick={() => window.location.href = `/products/${id}`}
-      >
-        Перейти
-      </button>
+      <Link href={`/products/${id}`}>
+        <button
+          className="justify-center items-center px-16 py-4 mt-2.5 text-xl font-medium text-white whitespace-nowrap bg-blue-600 rounded-[10000px] max-md:px-5 cursor-pointer w-full m-auto"
+        >
+          Перейти
+        </button>
+      </Link>
     </div>
   );
 };
