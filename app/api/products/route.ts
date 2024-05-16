@@ -1,3 +1,5 @@
+import { sql } from "@vercel/postgres";
+
 
 interface Product {
     id: string;
@@ -6,7 +8,7 @@ interface Product {
     description: string;
     rating: number;
     image: string;
-    reviews?: {
+    reviews: {
         "author": string;
         "rating": number;
         "content": string;
@@ -17,6 +19,8 @@ export async function GET(
     req: any
 ) {
     let product_id: string = req.nextUrl.searchParams.get("id");
+    const { rows } = await sql`SELECT * FROM reviews;`;
+
     const products: Product[] = [
         {
             id: '1',
@@ -25,13 +29,7 @@ export async function GET(
             rating: 4,
             description: 'The Apple Magic Pro is the best keyboard for your Mac.',
             image: '/id/1.png',
-            reviews: [
-                {
-                    "author": "John Doe",
-                    "rating": 5,
-                    "content": "I love this keyboard! Very comfortable to type on."
-                }
-            ]
+            reviews: []
         },
         {
             id: '2',
@@ -40,13 +38,7 @@ export async function GET(
             rating: 5,
             description: 'The Fifine a9v is the best microphone for your home studio.',
             image: '/id/2.png',
-            reviews: [
-                {
-                    "author": "Jane Doe",
-                    "rating": 5,
-                    "content": "I love this microphone! Very clear sound."
-                }
-            ]
+            reviews: []
         },
         {
             id: '3',
@@ -55,15 +47,21 @@ export async function GET(
             rating: 3,
             description: 'The JBL Quantum 100 is the best headset for your gaming setup.',
             image: '/id/3.png',
-            reviews: [
-                {
-                    "author": "John Doe",
-                    "rating": 4,
-                    "content": "I love this headset! Very comfortable to wear."
-                }
-            ]
+            reviews: []
         }
     ];
+
+    for (const row of rows) {
+        const product = products.find(product => product.id == row.product_id);
+        if (product) {
+            product.reviews.push({
+                author: row.name,
+                rating: row.rating,
+                content: row.content
+            } as any);
+        }
+    }
+
 
     if (product_id) {
         const product = products.find(product => product.id === product_id);
