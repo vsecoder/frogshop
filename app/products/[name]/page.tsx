@@ -26,7 +26,7 @@ export default function Home() {
       <Summary id={name} />
       <Reviews id={name} />
       <SignedIn>
-        <Write />
+        <Write id={name} />
       </SignedIn>
       <Team />
     </div>

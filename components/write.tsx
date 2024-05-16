@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import StarRating from "./stars";
+import { useUser } from "@clerk/nextjs";
+
 
 interface ColorOptionProps {
     color: string;
@@ -13,13 +15,34 @@ const ColorOption: React.FC<ColorOptionProps> = ({ color, className, onClick }) 
     <button className={`justify-center px-4 py-2.5 rounded-md ${className} max-md:px-5`} onClick={onClick}>{color}</button>
 );
 
-export default function Write() {
+export default function Write({ id }: { id: string }) {
     let swears = /(?<![а-яё])(?:(?:(?:у|[нз]а|(?:хитро|не)?вз?[ыьъ]|с[ьъ]|(?:и|ра)[зс]ъ?|(?:о[тб]|п[оа]д)[ьъ]?|(?:\S(?=[а-яё]))+?[оаеи-])-?)?(?:[её](?:б(?!о[рй]|рач)|п[уа](?:ц|тс))|и[пб][ае][тцд][ьъ]).*?|(?:(?:н[иеа]|ра[зс]|[зд]?[ао](?:т|дн[оа])?|с(?:м[еи])?|а[пб]ч)-?)?ху(?:[яйиеёю]|л+и(?!ган)).*?|бл(?:[эя]|еа?)(?:[дт][ьъ]?)?|\S*?(?:п(?:[иеё]зд|ид[аое]?р|ед(?:р(?!о)|[аое]р|ик)|охую)|бля(?:[дбц]|тс)|[ое]ху[яйиеё]|хуйн).*?|(?:о[тб]?|про|на|вы)?м(?:анд(?:[ауеыи](?:л(?:и[сзщ])?[ауеиы])?|ой|[ао]в.*?|юк(?:ов|[ауи])?|е[нт]ь|ища)|уд(?:[яаиое].+?|е?н(?:[ьюия]|ей))|[ао]л[ао]ф[ьъ](?:[яиюе]|[еёо]й))|елд[ауые].*?|ля[тд]ь|(?:[нз]а|по)х)(?![а-яё])/g;
     const [swearsDetected, setSwearsDetected] = React.useState<boolean>(false);
+    const [rating, setRating] = React.useState<number>(3);
+    const { user } = useUser();
 
     const handleColorClick = (color: string) => {
         console.log(`Selected color: ${color}`);
     };
+
+    async function create() {
+        const content = document.querySelector("textarea")?.value;
+        const response = await fetch(`/api/create?content=${content}&author=${user?.username}&rating=${rating}&id=${id}`);
+        let data = await response.json();
+        console.log(data);
+        data = data.body.choices[0].message.content;
+        data = JSON.parse(data);
+
+        if (data.stop) {
+            console.log("AI Swear detected!");
+            setSwearsDetected(true);
+        } else {
+            console.log("AI No swears detected!");
+            setSwearsDetected(false);
+
+            alert("Отзыв успешно отправлен!");
+        }
+    }
 
     async function check() {
         const content = document.querySelector("textarea")?.value;
@@ -35,7 +58,7 @@ export default function Write() {
         } else {
             console.log("AI No swears detected!");
             setSwearsDetected(false);
-
+            create();
             alert("Отзыв успешно отправлен!");
         }
     }
@@ -62,7 +85,6 @@ export default function Write() {
         console.log(`Rated: ${rating}`);
     };
 
-    const [rating, setRating] = React.useState<number>(3);
 
     return (
         <div className="p-5 pt-0">

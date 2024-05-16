@@ -47,7 +47,7 @@ export default function Reviews({ id }: { id: string }) {
                     <h1 className="text-3xl font-bold text-stone-950">Отзывы</h1>
                     <div className="flex gap-2.5 justify-center my-auto text-xl font-semibold text-neutral-400">
                         <span>Средняя оценка</span>
-                        <span>{middleRating}/5</span>
+                        <span>{middleRating.toFixed(1)}/5</span>
                     </div>
                 </header>
                 <div className="flex overflow-x-auto gap-5 px-5 mt-5 snap-x">
