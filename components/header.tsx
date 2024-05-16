@@ -55,7 +55,9 @@ export default function Header() {
                                 alt="Login icon"
                                 className="shrink-0 w-6 aspect-square"
                             />
-                            <SignInButton />
+                            <SignInButton>
+                                <button>Войти</button>
+                            </SignInButton>
                         </SignedOut>
                         <SignedIn>
                             <UserButton />
