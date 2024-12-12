@@ -60,17 +60,9 @@ export default function Summary({ id }: { id: string }) {
             .then((response) => response.json())
             .then((response) => {
                 console.log(response);
-                let body = response.body.choices;
+                let body = response.body;
 
-                if (!body) {
-                    return;
-                }
-
-                if (body.length === 0) {
-                    return;
-                }
-
-                body = body[0].message.content;
+                body = body.answer;
 
                 const { nice, bad } = JSON.parse(body);
                 setSummary({ nice: nice, bad: bad });

@@ -1,6 +1,5 @@
 import { sql } from "@vercel/postgres";
 
-
 interface Product {
     id: string;
     name: string;
@@ -15,9 +14,7 @@ interface Product {
     }[];
 }
 
-export async function GET(
-    req: any
-) {
+export async function GET(req: any) {
     let product_id: string = req.nextUrl.searchParams.get("id");
     const { rows } = await sql`SELECT * FROM reviews;`;
 
@@ -58,10 +55,31 @@ export async function GET(
                 author: row.name,
                 rating: row.rating,
                 content: row.content
-            } as any);
+            });
         }
     }
 
+    for (const product of products) {
+        if (product.reviews.length === 0) {
+            product.reviews = [
+                {
+                    author: "Test User 1",
+                    rating: 5,
+                    content: "This is an amazing product! Highly recommend."
+                },
+                {
+                    author: "Test User 2",
+                    rating: 4,
+                    content: "Great product, but it could use some improvements."
+                },
+                {
+                    author: "Test User 3",
+                    rating: 3,
+                    content: "It's okay, but not exactly what I expected."
+                }
+            ];
+        }
+    }
 
     if (product_id) {
         const product = products.find(product => product.id === product_id);

@@ -1,39 +1,33 @@
-const headers = {
-    //'x-wormgpt-provider': 'deepseek',
-    //'x-wormgpt-provider': 'llama',
-    'x-wormgpt-provider': 'worm_gpt',
-    'Content-Type': 'application/json',
-}
 
 var prompt = {
-    'messages': [
-        {
-            'role': 'system',
-            'content': `В запросе текст отзыва, если отзыв к продукту содержит оскорбления, ненормативную лексику, нецензурные выражения или является неадекватным, то необходимо вернуть true в JSON формате, такого типа:
+    "model": "gpt-4o-mini",
+    "request": {
+        "messages": [
+            {
+                'role': 'system',
+                'content': `В запросе текст отзыва, если отзыв к продукту содержит оскорбления, ненормативную лексику, нецензурные выражения или является неадекватным, то необходимо вернуть true в JSON формате, такого типа:
 {"stop": true}
 Иначе вернуть:
-{"stop": false}
-`,
-        },
-        {
-            'role': 'user',
-            'content': ''
-        }
-    ],
-    'max_tokens': 820,
+{"stop": false}`
+            },
+            {
+                'role': 'user',
+                'content': ''
+            }
+        ]
+    }
 }
 
 export async function GET(
     req: any
 ) {
     const content: string = req.nextUrl.searchParams.get("content");
-    prompt.messages[1].content = content;
-    const url = `https://wrmgpt.com/v1/chat/completions`;
+    prompt.request.messages[1].content = content;
+    const url = `http://api.onlysq.ru/ai/v2`;
 
 
     var answer = await fetch(url, {
         method: 'POST',
-        headers: headers,
         body: JSON.stringify(prompt)
     })
         .then(response => response.json())

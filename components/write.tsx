@@ -30,18 +30,7 @@ export default function Write({ id }: { id: string }) {
         const response = await fetch(`/api/create?content=${content}&author=${user?.username}&rating=${rating}&id=${id}`);
         let data = await response.json();
         console.log(data);
-        data = data.body.choices[0].message.content;
-        data = JSON.parse(data);
-
-        if (data.stop) {
-            console.log("AI Swear detected!");
-            setSwearsDetected(true);
-        } else {
-            console.log("AI No swears detected!");
-            setSwearsDetected(false);
-
-            alert("Отзыв успешно отправлен!");
-        }
+        alert("Отзыв успешно отправлен!");
     }
 
     async function check() {
@@ -49,7 +38,7 @@ export default function Write({ id }: { id: string }) {
         const response = await fetch(`/api/check?content=${content}`);
         let data = await response.json();
         console.log(data);
-        data = data.body.choices[0].message.content;
+        data = data.body.answer;
         data = JSON.parse(data);
 
         if (data.stop) {
